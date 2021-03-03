@@ -2,29 +2,24 @@ package net.slipp.counter
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.viewModels
 import net.slipp.counter.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), MainContract.View {
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    override lateinit var presenter: MainContract.Presenter
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        presenter = MainPresenter(this)
-        binding.buttonUp.setOnClickListener { presenter.increment() }
-        binding.buttonDown.setOnClickListener { presenter.decrement() }
-    }
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
 
-    override fun onResume() {
-        super.onResume()
-        presenter.start()
-    }
-
-    override fun showCount(count: Long) {
-        binding.textView.text = count.toString()
+        viewModel.onDecrementFailed.observe(this) {
+            Toast.makeText(this, R.string.cannot_lower_than_0, Toast.LENGTH_SHORT).show()
+        }
     }
 }

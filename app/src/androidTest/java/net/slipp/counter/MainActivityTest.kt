@@ -24,9 +24,10 @@ class MainActivityTest {
     @Test
     fun `Down 버튼을 누르면 숫자 1 감소해야 한다`() {
         // when
+        onView(withId(R.id.buttonUp)).perform(click())
         onView(withId(R.id.buttonDown)).perform(click())
 
         // then
-        onView(withId(R.id.textView)).check(matches(withText("-1")))
+        onView(withId(R.id.textView)).check(matches(withText("0")))
     }
 }

@@ -7,11 +7,16 @@ class Counter {
     val count: Long
         get() = _count.get()
 
-    fun increment() {
+    fun increment(): Boolean {
         _count.incrementAndGet()
+        return true
     }
 
-    fun decrement() {
+    fun decrement(): Boolean {
+        val count = _count.get()
+        if (count <= 0) return false
+
         _count.decrementAndGet()
+        return true
     }
 }

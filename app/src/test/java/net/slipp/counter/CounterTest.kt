@@ -24,10 +24,11 @@ class CounterTest {
     @Test
     fun `숫자가 1 감소할 수 있어야 한다`() {
         // when
+        counter.increment()
         counter.decrement()
 
         // then
-        assertThat(counter.count).isEqualTo(-1)
+        assertThat(counter.count).isEqualTo(0)
     }
 
     @Test
