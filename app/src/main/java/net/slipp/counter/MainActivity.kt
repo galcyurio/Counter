@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         binding.viewModel = viewModel
 
         viewModel.onDecrementFailed.observe(this) {
+            if (it.consume() == null) return@observe
             Toast.makeText(this, R.string.cannot_lower_than_0, Toast.LENGTH_SHORT).show()
         }
     }

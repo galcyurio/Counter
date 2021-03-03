@@ -11,8 +11,8 @@ class MainViewModel : ViewModel() {
     val count: LiveData<Long>
         get() = _count
 
-    private val _onDecrementFailed = MutableLiveData<Unit>()
-    val onDecrementFailed: LiveData<Unit>
+    private val _onDecrementFailed = MutableLiveData<Event<Any>>()
+    val onDecrementFailed: LiveData<Event<Any>>
         get() = _onDecrementFailed
 
     fun increment() {
@@ -25,7 +25,7 @@ class MainViewModel : ViewModel() {
         if (result) {
             _count.value = counter.count
         } else {
-            _onDecrementFailed.value = Unit
+            _onDecrementFailed.value = Event(Unit)
         }
     }
 }
