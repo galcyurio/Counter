@@ -35,6 +35,11 @@ android {
         viewBinding true
         dataBinding true
     }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
@@ -48,6 +53,8 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'com.google.truth:truth:1.1.2'
     testImplementation 'io.mockk:mockk:1.10.6'
+    testImplementation 'org.robolectric:robolectric:4.4'
+    testImplementation 'androidx.test:core-ktx:1.4.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
